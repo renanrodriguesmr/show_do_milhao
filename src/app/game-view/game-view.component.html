@@ -1,0 +1,17 @@
+<p>
+  Show do Milhao!!
+</p>
+<p>
+  round {{round_id}}
+</p>
+
+<div class="alert alert-primary" role="alert">
+  Enunciado
+</div>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()" >Alternativa A</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa B</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa C</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa D</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa E</button>
+
+<app-decision-point *ngIf = "this.answered_question" [round_id] = "round_id"></app-decision-point>
