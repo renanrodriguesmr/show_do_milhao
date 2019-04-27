@@ -1,7 +1,9 @@
+import { QuestionsService } from './../questions.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { ActionSequence } from 'protractor';
+import { Question } from '../question';
 
 @Component({
   selector: 'app-initial-view',
@@ -9,21 +11,11 @@ import { ActionSequence } from 'protractor';
   styleUrls: ['./initial-view.component.sass']
 })
 export class InitialViewComponent implements OnInit {
-  itemsRef: AngularFireList<{}>;
-  items: Observable<any[]>;
 
-  constructor(db: AngularFireDatabase) {
-    this.itemsRef = db.list('perguntas');
-    this.itemsRef.valueChanges().subscribe(questions => {
-      questions.forEach(question => {
-        console.log(question);
-      });
-    });
-
+  constructor(private questionsService: QuestionsService ) {
   }
 
   ngOnInit() {
-    console.log(this.items);
   }
 
 }

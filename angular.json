@@ -139,5 +139,10 @@
       }
     }
   },
-  "defaultProject": "show-do-milhao"
+  "defaultProject": "show-do-milhao",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

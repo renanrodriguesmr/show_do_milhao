@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
 })
 export class DecisionPointComponent implements OnInit {
   @Input() round_id: String;
+  @Input() success: Boolean;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log(this.success);
   }
   
   goToNext() {

@@ -10,6 +10,7 @@ import { InitialViewComponent } from './initial-view/initial-view.component';
 import { GameViewComponent } from './game-view/game-view.component';
 import { DecisionPointComponent } from './decision-point/decision-point.component';
 import { RedirectToNewQuestionComponent } from './redirect-to-new-question/redirect-to-new-question.component';
+import { AnswerResultPipe } from './answer-result.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RedirectToNewQuestionComponent } from './redirect-to-new-question/redir
     InitialViewComponent,
     GameViewComponent,
     DecisionPointComponent,
-    RedirectToNewQuestionComponent
+    RedirectToNewQuestionComponent,
+    AnswerResultPipe
   ],
   imports: [
     BrowserModule,

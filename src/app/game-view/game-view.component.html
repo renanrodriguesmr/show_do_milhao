@@ -6,12 +6,11 @@
 </p>
 
 <div class="alert alert-primary" role="alert">
-  Enunciado
+  {{(question)?.sentence}}
 </div>
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()" >Alternativa A</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa B</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa C</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa D</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="answer()">Alternativa E</button>
 
-<app-decision-point *ngIf = "this.answered_question" [round_id] = "round_id"></app-decision-point>
+<div *ngFor = "let alternative of (question)?.answers(); let i = index">
+    <button type="button" class="btn btn-primary btn-lg btn-block answeres" (click)="answer(i)" [disabled]="answered_question" >{{alternative}}</button>
+</div>
+
+<app-decision-point *ngIf = "answered_question" [round_id] = "round_id" [success] = "success"></app-decision-point>
