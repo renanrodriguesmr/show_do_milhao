@@ -1,6 +1,7 @@
 import { Question } from './../question';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Round } from '../round';
 
 @Component({
   selector: 'app-decision-point',
@@ -8,18 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./decision-point.component.sass']
 })
 export class DecisionPointComponent implements OnInit {
-  @Input() round_id: String;
+  @Input() round: Round;
+  @Input() next_round: Round;
   @Input() success: Boolean;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log(this.success);
+    console.log(this.next_round);
   }
   
   goToNext(): void {
-    this.round_id =String(Number(this.round_id) + 1);
-    this.router.navigateByUrl('/restart/' + this.round_id);
+    this.router.navigateByUrl('/restart/' + String(this.next_round.round_id));
   }
 
   endGame(): void {

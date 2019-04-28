@@ -2,7 +2,13 @@
   Show do Milhao!!
 </p>
 <p>
-  round {{round_id}}
+  Você está na rodada {{round_id}}
+</p>
+<p>
+  Se você acertar a pergunta, acumula R$ {{(round)?.right_answer}}
+</p>
+<p>
+  Se você errar, vai embora com R$ {{(round)?.wrong_answer}}
 </p>
 
 <div class="alert alert-primary" role="alert">
@@ -13,4 +19,4 @@
     <button type="button" class="btn btn-primary btn-lg btn-block answeres" (click)="answer(i)" [disabled]="answered_question" >{{alternative}}</button>
 </div>
 
-<app-decision-point *ngIf = "answered_question" [round_id] = "round_id" [success] = "success"></app-decision-point>
+<app-decision-point *ngIf = "answered_question" [round] = "round" [next_round] = "next_round" [success] = "success"></app-decision-point>

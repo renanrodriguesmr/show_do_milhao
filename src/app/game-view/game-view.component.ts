@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireObject } from '@angular/fire/database';
 import { QuestionsService } from '../questions.service';
+import { Round } from '../round';
+import { RoundsService } from '../rounds.service';
 
 @Component({
   selector: 'app-game-view',
@@ -15,18 +17,24 @@ export class GameViewComponent implements OnInit {
   answered_question: Boolean;
   success: Boolean;
   questionsReference: AngularFireObject<{}>;
+  roundsReference: AngularFireObject<{}>;
+  nextRoundsReference: AngularFireObject<{}>;
   question: Question;
+  round: Round;
+  next_round: Round;
 
 
   constructor(
     private route: ActivatedRoute,
-    private questionsService: QuestionsService
+    private questionsService: QuestionsService,
+    private roundsService: RoundsService
   ) { }
 
   ngOnInit() {
     this.round_id = this.route.snapshot.paramMap.get('round');
     this.answered_question = false;
-    this.getQuestionInfo();  
+    this.getQuestionInfo();
+    this.getRoundInfo();
   }
 
   getQuestionInfo(): void {
@@ -35,7 +43,17 @@ export class GameViewComponent implements OnInit {
       var data = datainfo.payload.val();
       this.question = new Question(data['enunciado'], data['resposta1']['certa'], data['resposta1']['texto'], data['resposta2']['certa'], data['resposta2']['texto'], data['resposta3']['certa'], data['resposta3']['texto'], data['resposta4']['certa'], data['resposta4']['texto'], data['resposta5']['certa'], data['resposta5']['texto'], Number(datainfo.key));
       console.log(this.question.rightAnswer());
-      console.log(Question.questionslist);
+    });
+  }
+
+  getRoundInfo(): void {
+    this.roundsReference = this.roundsService.getRoundInfoById(Number(this.round_id));
+    this.nextRoundsReference = this.roundsService.getRoundInfoById(Number(this.round_id) + 1);
+    this.roundsReference.valueChanges().subscribe(data => {
+      this.round = new Round(Number(this.round_id), data['acertar'], data['errar'], data['parar']);
+    });
+    this.nextRoundsReference.valueChanges().subscribe(data => {
+      this.next_round = new Round(Number(this.round_id) + 1, data['acertar'], data['errar'], data['parar']);
     });
   }
 
