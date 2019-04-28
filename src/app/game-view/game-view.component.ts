@@ -26,10 +26,11 @@ export class GameViewComponent implements OnInit {
   ngOnInit() {
     this.round_id = this.route.snapshot.paramMap.get('round');
     this.answered_question = false;
-    this.questionsReference = this.questionsService.generateQuestionObjectById(1);
 
+    this.questionsReference = this.questionsService.generateQuestion();
     this.questionsReference.valueChanges().subscribe(data => {
       this.question = new Question(data['enunciado'], data['resposta1']['certa'], data['resposta1']['texto'], data['resposta2']['certa'], data['resposta2']['texto'], data['resposta3']['certa'], data['resposta3']['texto'], data['resposta4']['certa'], data['resposta4']['texto'], data['resposta5']['certa'], data['resposta5']['texto']);
+      console.log(this.question.rightAnswer());
     });
     
   }

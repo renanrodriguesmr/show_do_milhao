@@ -16,6 +16,7 @@ export class InitialViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.questionsService.setTotais();
   }
 
 }

@@ -58,3 +58,18 @@ export class Answer {
         return this._text;
     }
 }
+
+export class Totais {
+    private _questions: number;
+    private _rounds: number;
+    constructor(questions: number, rounds: number){
+        this._questions = questions;
+        this._rounds = rounds;
+    }
+    get questions() {
+        return this._questions;
+    }
+    get rounds() {
+        return this._rounds;
+    }
+}
