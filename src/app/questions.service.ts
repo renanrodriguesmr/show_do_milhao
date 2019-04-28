@@ -18,7 +18,7 @@ export class QuestionsService {
     return Math.floor( Math.random()*(max-min+1)) + min;
   }
   private getRandomIndexQuestion(total: number): number {
-    var index = this.getRandomInt(0, total);
+    var index = this.getRandomInt(0, total-1);
     if (Question.questionslist.indexOf(index) == -1){
       return index;
     } else {

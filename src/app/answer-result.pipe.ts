@@ -6,9 +6,13 @@ import { Round } from './round';
 })
 export class AnswerResultPipe implements PipeTransform {
 
-  transform(success: boolean, round: Round, round_next: Round): string {
+  transform(success: boolean, round: Round, next_round: Round): string {
     if (success){
-      return "Correta. Seu prêmio atual é de R$" + round.right_answer + ". Você pode desistir e ficar com R$" + round_next.stop + ". A próxima pergunta vale R$ " + round_next.right_answer + ". Mas se errar, leva pra casa R$ " + round_next.wrong_answer + ".";
+      if (next_round != null){
+        return "Correta. Seu prêmio atual é de R$" + round.right_answer + ". Você pode desistir e ficar com R$" + next_round.stop + ". A próxima pergunta vale R$ " + next_round.right_answer + ". Mas se errar, leva pra casa R$ " + next_round.wrong_answer + ".";
+      } else {
+        return "Correta. Você ganhou 1 MILHÃO! Parabéns!"
+      }
     } else {
       return "Errada. Você vai embora para casa com R$" + round.wrong_answer;
     }

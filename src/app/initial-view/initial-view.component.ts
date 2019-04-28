@@ -1,9 +1,4 @@
-import { QuestionsService } from './../questions.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
-import { ActionSequence } from 'protractor';
-import { Question } from '../question';
 import { TotalsService } from '../totals.service';
 
 @Component({
@@ -13,7 +8,7 @@ import { TotalsService } from '../totals.service';
 })
 export class InitialViewComponent implements OnInit {
 
-  constructor(private totalsService: TotalsService ) {
+  constructor(private totalsService: TotalsService) {
   }
 
   ngOnInit() {

@@ -47,13 +47,23 @@ export class GameViewComponent implements OnInit {
   }
 
   getRoundInfo(): void {
+    this.actualRoundInfo();
+    this.nextRoundInfo();    
+  }
+  actualRoundInfo(): void {
     this.roundsReference = this.roundsService.getRoundInfoById(Number(this.round_id));
-    this.nextRoundsReference = this.roundsService.getRoundInfoById(Number(this.round_id) + 1);
     this.roundsReference.valueChanges().subscribe(data => {
       this.round = new Round(Number(this.round_id), data['acertar'], data['errar'], data['parar']);
     });
+  }
+  nextRoundInfo(): void {
+    this.nextRoundsReference = this.roundsService.getRoundInfoById(Number(this.round_id) + 1);
     this.nextRoundsReference.valueChanges().subscribe(data => {
-      this.next_round = new Round(Number(this.round_id) + 1, data['acertar'], data['errar'], data['parar']);
+      if (data == null) {
+        this.next_round = null;
+      } else {
+        this.next_round = new Round(Number(this.round_id) + 1, data['acertar'], data['errar'], data['parar']);
+      }
     });
   }
 

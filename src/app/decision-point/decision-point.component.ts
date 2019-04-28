@@ -16,7 +16,6 @@ export class DecisionPointComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log(this.next_round);
   }
   
   goToNext(): void {
