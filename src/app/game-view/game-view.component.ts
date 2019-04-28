@@ -1,7 +1,7 @@
+import { Question } from './../question';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireObject } from '@angular/fire/database';
-import { Question } from '../question';
 import { QuestionsService } from '../questions.service';
 
 @Component({
@@ -26,16 +26,21 @@ export class GameViewComponent implements OnInit {
   ngOnInit() {
     this.round_id = this.route.snapshot.paramMap.get('round');
     this.answered_question = false;
-
-    this.questionsReference = this.questionsService.generateQuestion();
-    this.questionsReference.valueChanges().subscribe(data => {
-      this.question = new Question(data['enunciado'], data['resposta1']['certa'], data['resposta1']['texto'], data['resposta2']['certa'], data['resposta2']['texto'], data['resposta3']['certa'], data['resposta3']['texto'], data['resposta4']['certa'], data['resposta4']['texto'], data['resposta5']['certa'], data['resposta5']['texto']);
-      console.log(this.question.rightAnswer());
-    });
+    this.getQuestionInfo();
     
   }
 
-  answer(i: number){
+  getQuestionInfo(): void {
+    this.questionsReference = this.questionsService.generateQuestion();
+    this.questionsReference.snapshotChanges().subscribe(datainfo => {
+      var data = datainfo.payload.val();
+      this.question = new Question(data['enunciado'], data['resposta1']['certa'], data['resposta1']['texto'], data['resposta2']['certa'], data['resposta2']['texto'], data['resposta3']['certa'], data['resposta3']['texto'], data['resposta4']['certa'], data['resposta4']['texto'], data['resposta5']['certa'], data['resposta5']['texto'], Number(datainfo.key));
+      console.log(this.question.rightAnswer());
+      console.log(Question.questionslist);
+    });
+  }
+
+  answer(i: number): void{
     this.success = (i == this.question.rightAnswer());
     this.answered_question = true;
   }

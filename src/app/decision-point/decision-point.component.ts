@@ -1,3 +1,4 @@
+import { Question } from './../question';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,9 +17,14 @@ export class DecisionPointComponent implements OnInit {
     console.log(this.success);
   }
   
-  goToNext() {
+  goToNext(): void {
     this.round_id =String(Number(this.round_id) + 1);
     this.router.navigateByUrl('/restart/' + this.round_id);
+  }
+
+  endGame(): void {
+    Question.emptyQuestionList();
+    this.router.navigateByUrl('/start');
   }
 
 }

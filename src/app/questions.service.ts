@@ -16,14 +16,13 @@ export class QuestionsService {
     return this.db.object('perguntas/' + id);
   }
   private getRandomInt(min: number, max: number): number {
-    return Math.floor( Math.random() *(max-min+1)) + min;
+    return Math.floor( Math.random()*(max-min+1)) + min;
   }
 
   private instanceTotais(questions: number, rounds: number): void {
     this.totais = new Totais(questions, rounds);
   }
   public setTotais(): void {
-    console.log(this.totais);
     var ref = this.db.object('totais').valueChanges();
     ref.subscribe(data => {
       this.instanceTotais(data['perguntas'], data['rodadas']);
