@@ -18,6 +18,14 @@ export class QuestionsService {
   private getRandomInt(min: number, max: number): number {
     return Math.floor( Math.random()*(max-min+1)) + min;
   }
+  private getRandomIndexQuestion(total: number): number {
+    var index = this.getRandomInt(0, total);
+    if (Question.questionslist.indexOf(index) == -1){
+      return index;
+    } else {
+      return this.getRandomIndexQuestion(total);
+    }
+  }
 
   private instanceTotais(questions: number, rounds: number): void {
     this.totais = new Totais(questions, rounds);
@@ -29,7 +37,7 @@ export class QuestionsService {
     });
   }
   public generateQuestion(): AngularFireObject<{}> {
-    var index = this.getRandomInt(0, this.totais.questions);
+    var index = this.getRandomIndexQuestion(this.totais.questions);
     return this.generateQuestionObjectById(index);
   }
 

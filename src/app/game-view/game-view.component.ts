@@ -26,8 +26,7 @@ export class GameViewComponent implements OnInit {
   ngOnInit() {
     this.round_id = this.route.snapshot.paramMap.get('round');
     this.answered_question = false;
-    this.getQuestionInfo();
-    
+    this.getQuestionInfo();  
   }
 
   getQuestionInfo(): void {
