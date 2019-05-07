@@ -1,6 +1,8 @@
 import { Question } from './../question';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Round } from '../round';
 
 @Component({
@@ -12,8 +14,12 @@ export class DecisionPointComponent implements OnInit {
   @Input() round: Round;
   @Input() next_round: Round;
   @Input() success: Boolean;
+  modalRef: BsModalRef;
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router,
+              private modalService: BsModalService,
+  ) { }
 
   ngOnInit() {
   }
@@ -23,8 +29,15 @@ export class DecisionPointComponent implements OnInit {
   }
 
   endGame(): void {
+    this.closeModal();
     Question.emptyQuestionList();
     this.router.navigateByUrl('/start');
+  }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template,{ backdrop: 'static', keyboard: false });
+  }
+  closeModal(){
+    this.modalRef.hide();
   }
 
 }

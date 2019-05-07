@@ -18,5 +18,11 @@
 <div *ngFor = "let alternative of (question)?.answers(); let i = index">
     <button type="button" class="btn btn-primary btn-lg btn-block answeres" (click)="answer(i)" [disabled]="answered_question" >{{alternative}}</button>
 </div>
+<div class="row help_line">
+  <div class="col center_button"><button type="button" class="btn btn-outline-secondary">Pular Pergunta</button></div>
+  <div class="col center_button"><button type="button" class="btn btn-outline-warning">Ajuda dos Universitários</button></div>
+  <div class="col center_button"><button type="button" class="btn btn-outline-dark">Eliminar 2</button></div>  
+</div>
+
 
 <app-decision-point *ngIf = "answered_question" [round] = "round" [next_round] = "next_round" [success] = "success"></app-decision-point>

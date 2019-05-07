@@ -45,7 +45,6 @@ export class GameViewComponent implements OnInit {
       console.log(this.question.rightAnswer());
     });
   }
-
   getRoundInfo(): void {
     this.actualRoundInfo();
     this.nextRoundInfo();    
@@ -66,7 +65,6 @@ export class GameViewComponent implements OnInit {
       }
     });
   }
-
   answer(i: number): void{
     this.success = (i == this.question.rightAnswer());
     this.answered_question = true;
